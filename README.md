@@ -6,24 +6,42 @@ Dies ist eine Telegram Mini-App zur Durchführung von Umfragen. Nutzer können f
 ## 📂 Dateien
 - `index.html`: Hauptseite mit Umfrageformular und Ergebnisanzeige
 - `styles.css`: Design und Layout der App
-- `script.js`: Verbindung zu Firebase Firestore und Echtzeit-Auswertung
+- `script.js`: Verbindung zu Supabase und Echtzeit-Auswertung
 
 ## 🔧 Voraussetzungen
-1. Firebase-Projekt mit Firestore-Datenbank
-2. Hosting-Plattform (z. B. Vercel, Netlify oder GitHub Pages)
-3. Telegram-Bot mit WebApp-Integration
+1. **Supabase-Projekt mit Tabelle `umfrage`**
+   - Spalten: `id (UUID)`, `feature (TEXT)`, `created_at (TIMESTAMP)`
+2. **Supabase URL und ANON KEY**
+3. **Hosting-Plattform (z. B. Vercel oder Netlify)**
+4. **Telegram-Bot mit WebApp-Integration**
 
 ## 🚀 Installation
-1. **Firebase einrichten:**
-   - Gehe zur [Firebase Console](https://console.firebase.google.com/)
-   - Erstelle ein Projekt und aktiviere Firestore
-   - Kopiere die Firebase-Konfiguration und füge sie in `script.js` ein
-2. **Dateien hochladen:**
-   - Lade alle Dateien (`index.html`, `styles.css`, `script.js`) auf eine Hosting-Plattform hoch
-   - Stelle sicher, dass die Dateien öffentlich zugänglich sind
-3. **Telegram-Bot einrichten:**
-   - Erstelle einen Telegram-Bot mit dem [BotFather](https://t.me/BotFather)
-   - Nutze den Befehl `/setdomain`, um die Hosting-URL der WebApp festzulegen
+### 1. Supabase einrichten:
+- Gehe zur [Supabase Console](https://app.supabase.com/)
+- Erstelle ein neues Projekt und aktiviere eine Datenbank
+- Erstelle die Tabelle `umfrage` mit den Spalten:
+  - `id (UUID, Primary Key, Default: gen_random_uuid())`
+  - `feature (TEXT, Not Null)`
+  - `created_at (TIMESTAMP, Default: now(), Not Null)`
+- Erstelle die folgenden Policies:
+```sql
+CREATE POLICY "Öffentliche Schreibrechte"
+ON public.umfrage
+FOR INSERT
+WITH CHECK (true);
+
+CREATE POLICY "Öffentliches Lesen der Ergebnisse"
+ON public.umfrage
+FOR SELECT
+USING (true);
+```
+### 2. Dateien hochladen:
+- Lade alle Dateien (`index.html`, `styles.css`, `script.js`) auf eine Hosting-Plattform wie **Vercel** oder **Netlify**
+- Stelle sicher, dass die Dateien öffentlich zugänglich sind
+
+### 3. Telegram-Bot einrichten:
+- Erstelle einen Telegram-Bot mit dem [BotFather](https://t.me/BotFather)
+- Nutze den Befehl `/setdomain`, um die Hosting-URL der WebApp festzulegen
 
 ## 🔗 Weiterführendes Tutorial
 Für eine detaillierte Anleitung zur Erstellung und Integration dieser Umfrage-App, besuche bitte das Tutorial auf: [Erstellung einer Umfrage-App mit Telegram Mini-Apps](https://telegram-mini-apps.de/docs/erstellung-einer-umfrage-app-mit-telegram-mini-apps/)
