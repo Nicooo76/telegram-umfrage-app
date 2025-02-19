@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini-App Umfrage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Umfrage: Welches Feature wünschst du dir?</h1>
+    
+    <form id="surveyForm">
+        <label>
+            <input type="radio" name="feature" value="Dark Mode"> Dark Mode
+        </label><br>
+        <label>
+            <input type="radio" name="feature" value="Sprachnachrichten"> Sprachnachrichten
+        </label><br>
+        <label>
+            <input type="radio" name="feature" value="GIF-Unterstützung"> GIF-Unterstützung
+        </label><br>
+        <button type="submit">Abstimmen</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>
